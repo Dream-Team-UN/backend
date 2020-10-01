@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>soda-js sample</title>
+	</head>
+	<body>
+		<script src="/lib/soda-js.bundle.js"></script>
+		<script>
+			var consumer = new soda.Consumer('datos.gov.co', {apiToken: '8MN5cWUibeUxx05DogJXXTTiV'});
+
+			consumer.query()
+				.withDataset('gt2j-8ykr')
+				.limit(5)
+				.getRows()
+					.on('success', function(rows){console.log(rows); mostrarTabla(rows);})
+					.on('error', function(error){console.error(error);});
+		</script>
+	</body>
+</html>
