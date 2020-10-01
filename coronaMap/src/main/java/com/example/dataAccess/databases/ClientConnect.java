@@ -10,12 +10,6 @@ public class ClientConnect {
 	HttpRequest request = HttpRequest.newBuilder()
 			.uri(URI.create("https://www.datos.gov.co/resource/gt2j-8ykr.json?$limit=10000")).build();
 	
-	public ClientConnect(HttpClient client, HttpRequest request) {
-		super();
-		this.client = client;
-		this.request = request;
-	}
-
 	public HttpClient getClient() {
 		return client;
 	}
