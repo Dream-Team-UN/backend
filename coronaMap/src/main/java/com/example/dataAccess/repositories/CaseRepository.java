@@ -50,8 +50,8 @@ public class CaseRepository {
 			JSONArray array = new JSONArray(resposeBody);
 			for (int i = 0; i < array.length(); i++) {
 				JSONObject cases = array.getJSONObject(i);
-				if (!cases.getString("estado").equals("Fallecido")) {
-					if (!cases.getString("estado").equals("Recuperado")) {
+				if (!cases.getString("atenci_n").equals("Fallecido")) {
+					if (!cases.getString("atenci_n").equals("Recuperado")) {
 						counter++;
 					}
 				}
@@ -79,7 +79,7 @@ public class CaseRepository {
 			JSONArray array = new JSONArray(resposeBody);
 			for (int i = 0; i < array.length(); i++) {
 				JSONObject cases = array.getJSONObject(i);
-				if (cases.getString("estado").equals("Recuperado")) {
+				if (cases.getString("atenci_n").equals("Recuperado")) {
 					counter++;
 				}
 
@@ -106,7 +106,32 @@ public class CaseRepository {
 			JSONArray array = new JSONArray(resposeBody);
 			for (int i = 0; i < array.length(); i++) {
 				JSONObject cases = array.getJSONObject(i);
-				if (cases.getString("estado").equals("Fallecido")) {
+				if (cases.getString("atenci_n").equals("Fallecido")) {
+					counter++;
+				}
+
+			}
+		} catch (JSONException e) {
+			e.printStackTrace();
+		}
+		return counter;
+	}
+	
+	public int totalAsintomatics() {
+
+		return client.getClient().sendAsync(client.getRequest(), HttpResponse.BodyHandlers.ofString())
+				.thenApply(HttpResponse::body).thenApply(CaseRepository::totalDied).join();
+
+	}
+
+	public static int totalAsintomatics(String resposeBody) {
+
+		int counter = 0;
+		try {
+			JSONArray array = new JSONArray(resposeBody);
+			for (int i = 0; i < array.length(); i++) {
+				JSONObject cases = array.getJSONObject(i);
+				if (cases.getString("estado").equals("Asintomático")) {
 					counter++;
 				}
 
