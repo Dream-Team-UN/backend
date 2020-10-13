@@ -7,8 +7,7 @@ import java.net.http.HttpRequest;
 public class ClientConnect {
 	
 	HttpClient client = HttpClient.newHttpClient();
-	HttpRequest request = HttpRequest.newBuilder()
-			.uri(URI.create("https://www.datos.gov.co/resource/gt2j-8ykr.json?$limit=1000000")).build();
+	String url = "https://www.datos.gov.co/resource/gt2j-8ykr.json";
 	
 	
 	
@@ -16,8 +15,9 @@ public class ClientConnect {
 		return client;
 	}
 
-	public HttpRequest getRequest() {
-		return request;
+	public HttpRequest ClientRequest(String request) {
+		return HttpRequest.newBuilder()
+				.uri(URI.create(url + request)).build();
 	}
 
 }

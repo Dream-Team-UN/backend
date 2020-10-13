@@ -2,7 +2,6 @@ package com.example.dataAccess.repositories;
 
 import java.net.http.HttpResponse;
 
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -19,127 +18,91 @@ public class CaseRepository {
 	//Se cuenta el total de casos
 	public int totalCases() {
 
-		return client.getClient().sendAsync(client.getRequest(), HttpResponse.BodyHandlers.ofString())
+		return client.getClient().sendAsync(client.ClientRequest("?$select=count(id_de_caso)"), HttpResponse.BodyHandlers.ofString())
 				.thenApply(HttpResponse::body).thenApply(CaseRepository::totalCases).join();
 
 	}
 
 	public static int totalCases(String responseBody) {
-		JSONArray array = null;
+		JSONObject total = null;
 		try {
-			array = new JSONArray(responseBody);
+			total = new JSONObject(responseBody.substring(1, responseBody.length()-1));
+			return total.getInt("count_id_de_caso");
 		} catch (JSONException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		return array.length();
+		
+		return -1;
 	}
 
 	//Total de infectadoas actuales
 	public int actualInfected() {
 
-		return client.getClient().sendAsync(client.getRequest(), HttpResponse.BodyHandlers.ofString())
-				.thenApply(HttpResponse::body).thenApply(CaseRepository::actualInfected).join();
+		return totalCases()-totalDied()-totalRecupered();
 
 	}
-
-	public static int actualInfected(String resposeBody) {
-
-		int counter = 0;
-		try {
-			JSONArray array = new JSONArray(resposeBody);
-			for (int i = 0; i < array.length(); i++) {
-				JSONObject cases = array.getJSONObject(i);
-				if (!cases.getString("atenci_n").equals("Fallecido")) {
-					if (!cases.getString("atenci_n").equals("Recuperado")) {
-						counter++;
-					}
-				}
-
-			}
-		} catch (JSONException e) {
-			e.printStackTrace();
-		}
-		return counter;
-	}
-
 	
 	//Total de recuperados
 	public int totalRecupered() {
 
-		return client.getClient().sendAsync(client.getRequest(), HttpResponse.BodyHandlers.ofString())
+		return client.getClient().sendAsync(client.ClientRequest("?atenci_n=Recuperado&$select=count(atenci_n)"), HttpResponse.BodyHandlers.ofString())
 				.thenApply(HttpResponse::body).thenApply(CaseRepository::totalRecupered).join();
 
 	}
 
-	public static int totalRecupered(String resposeBody) {
-
-		int counter = 0;
+	public static int totalRecupered(String responseBody) {
+		JSONObject recupered;
 		try {
-			JSONArray array = new JSONArray(resposeBody);
-			for (int i = 0; i < array.length(); i++) {
-				JSONObject cases = array.getJSONObject(i);
-				if (cases.getString("atenci_n").equals("Recuperado")) {
-					counter++;
-				}
-
-			}
+			recupered = new JSONObject(responseBody.substring(1, responseBody.length()-1));
+			return recupered.getInt("count_atenci_n");
 		} catch (JSONException e) {
+			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		return counter;
+		return -1;
+		
 	}
 	
 	
 	//Total de fallecidos
 	public int totalDied() {
 
-		return client.getClient().sendAsync(client.getRequest(), HttpResponse.BodyHandlers.ofString())
+		return client.getClient().sendAsync(client.ClientRequest("?atenci_n=Fallecido&$select=count(atenci_n)"), HttpResponse.BodyHandlers.ofString())
 				.thenApply(HttpResponse::body).thenApply(CaseRepository::totalDied).join();
 
 	}
 
-	public static int totalDied(String resposeBody) {
+	public static int totalDied(String responseBody) {
 
-		int counter = 0;
+		JSONObject died = null;
 		try {
-			JSONArray array = new JSONArray(resposeBody);
-			for (int i = 0; i < array.length(); i++) {
-				JSONObject cases = array.getJSONObject(i);
-				if (cases.getString("atenci_n").equals("Fallecido")) {
-					counter++;
-				}
-
-			}
-		} catch (JSONException e) {
+			died = new JSONObject(responseBody.substring(1, responseBody.length()-1));
+			return died.getInt("count_atenci_n");
+		}catch (Exception e) {
+			// TODO: handle exception
 			e.printStackTrace();
 		}
-		return counter;
+		return -1;
 	}
 	
 	public int totalAsintomatics() {
 
-		return client.getClient().sendAsync(client.getRequest(), HttpResponse.BodyHandlers.ofString())
-				.thenApply(HttpResponse::body).thenApply(CaseRepository::totalDied).join();
+		return client.getClient().sendAsync(client.ClientRequest("?estado=Asintomático&$select=count(estado)"), HttpResponse.BodyHandlers.ofString())
+				.thenApply(HttpResponse::body).thenApply(CaseRepository::totalAsintomatics).join();
 
 	}
 
-	public static int totalAsintomatics(String resposeBody) {
+	public static int totalAsintomatics(String responseBody) {
 
-		int counter = 0;
+		JSONObject asintomatic = null;
 		try {
-			JSONArray array = new JSONArray(resposeBody);
-			for (int i = 0; i < array.length(); i++) {
-				JSONObject cases = array.getJSONObject(i);
-				if (cases.getString("estado").equals("Asintomático")) {
-					counter++;
-				}
-
-			}
+			asintomatic = new JSONObject(responseBody.substring(1, responseBody.length()-1));
+			return asintomatic.getInt("count_estado");
 		} catch (JSONException e) {
 			e.printStackTrace();
 		}
-		return counter;
+		return -1;
 	}
 
 }
