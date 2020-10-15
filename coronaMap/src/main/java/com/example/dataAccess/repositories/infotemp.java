@@ -19,10 +19,11 @@ public class infotemp {
 	String casosTotales = String.valueOf(caso.totalCases());
 	String casosRecuperados = String.valueOf(caso.totalRecupered());
 	String casosFallecidos = String.valueOf(caso.totalDied());
-
+	String casosAsintomaticos = String.valueOf(caso.totalAsintomatics());
+	
 	@PostConstruct
 	public void init() {
-		infoList.add(new info(1,casosActuales, casosTotales, casosRecuperados, casosFallecidos));
+		infoList.add(new info(1,casosActuales, casosTotales, casosRecuperados, casosFallecidos,casosAsintomaticos));
 
 	}
 

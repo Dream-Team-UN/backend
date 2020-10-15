@@ -1,4 +1,4 @@
-package com.example.controllers;
+package com.example.dataAccess.controllers;
 
 
 import java.util.List;
@@ -22,7 +22,8 @@ public class ClientRestController {
 	String casosTotales = String.valueOf(caso.totalCases());
 	String casosRecuperados = String.valueOf(caso.totalRecupered());
 	String casosFallecidos = String.valueOf(caso.totalDied());
-
+	String casosAsintomaticos = String.valueOf(caso.totalAsintomatics());
+	
 	@Autowired
 	infotemp repository;
 
