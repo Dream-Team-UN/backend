@@ -1,4 +1,4 @@
-package com.example.dataAccess.entity;
+package com.example.dataAccess.models.entity;
 
 
 import java.io.Serializable;
@@ -23,7 +23,7 @@ public class Departamento implements Serializable  {
 	private Long id;	
 	
 	@Column
-	private Float name;
+	private String name;
 
 	@Column
 	private Float latitud;
@@ -31,18 +31,14 @@ public class Departamento implements Serializable  {
 	@Column
 	private Float longitud;
 	
-	@Column
-	private Float zoom;
-	
 	
 
-	public Departamento(Long id, Float name, Float latitud, Float longitud, Float zoom) {
+	public Departamento(Long id, String name, Float latitud, Float longitud) {
 		super();
 		this.id = id;
 		this.name = name;
 		this.latitud = latitud;
 		this.longitud = longitud;
-		this.zoom = zoom;
 	}
 
 	public Long getId() {
@@ -53,11 +49,11 @@ public class Departamento implements Serializable  {
 		this.id = id;
 	}
 
-	public Float getName() {
+	public String getName() {
 		return name;
 	}
 
-	public void setName(Float name) {
+	public void setName(String name) {
 		this.name = name;
 	}
 
@@ -77,18 +73,10 @@ public class Departamento implements Serializable  {
 		this.longitud = longitud;
 	}
 
-	public Float getZoom() {
-		return zoom;
-	}
-
-	public void setZoom(Float zoom) {
-		this.zoom = zoom;
-	}
-
 	@Override
 	public String toString() {
 		return "Departamento [id=" + id + ", name=" + name + ", latitud=" + latitud + ", longitud=" + longitud
-				+ ", zoom=" + zoom + "]";
+				+ "]";
 	}
 
 

@@ -1,4 +1,4 @@
-package com.example.dataAccess.entity;
+package com.example.dataAccess.models.entity;
 
 import java.io.Serializable;
 import javax.persistence.CascadeType;
@@ -11,6 +11,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+
 
 
 
@@ -38,22 +39,18 @@ public class Municipio implements Serializable {
 	@Column
 	private Float longitud;
 	
-	@Column
-	private Float zoom;
-	
 	 @JoinColumn(name = "fk_departamento", nullable = false)
 	    @ManyToOne(optional = false, cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-	    private Departamento dpto;
+	    private long dpto;
 	 
 	 
 
-	public Municipio(Long id, String name, Float latitud, Float longitud, Float zoom, Departamento dpto) {
+	public Municipio(Long id, String name, Float latitud, Float longitud, long dpto) {
 		super();
 		this.id = id;
 		this.name = name;
 		this.latitud = latitud;
 		this.longitud = longitud;
-		this.zoom = zoom;
 		this.dpto = dpto;
 	}
 
@@ -89,26 +86,17 @@ public class Municipio implements Serializable {
 		this.longitud = longitud;
 	}
 
-	public Float getZoom() {
-		return zoom;
-	}
-
-	public void setZoom(Float zoom) {
-		this.zoom = zoom;
-	}
-
-	public Departamento getDpto() {
+	public long getDpto() {
 		return dpto;
 	}
 
-	public void setDpto(Departamento dpto) {
+	public void setDpto(long dpto) {
 		this.dpto = dpto;
 	}
 
 	@Override
 	public String toString() {
-		return "Municipio [id=" + id + ", name=" + name + ", latitud=" + latitud + ", longitud=" + longitud + ", zoom="
-				+ zoom + ", dpto=" + dpto + "]";
+		return "Municipio [id=" + id + ", name=" + name + ", latitud=" + latitud + ", longitud=" + longitud + ", dpto=" + dpto + "]";
 	}
  
 	

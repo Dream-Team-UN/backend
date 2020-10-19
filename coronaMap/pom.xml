@@ -28,6 +28,12 @@
 		</dependency>
 
 		<dependency>
+			<groupId>org.xerial</groupId>
+			<artifactId>sqlite-jdbc</artifactId>
+			<version>3.28.0</version>
+		</dependency>
+
+		<dependency>
 			<groupId>com.socrata</groupId>
 			<artifactId>soda-api-java</artifactId>
 			<version>0.10.5</version>
@@ -57,7 +63,7 @@
 			<artifactId>mysql-connector-java</artifactId>
 			<scope>runtime</scope>
 		</dependency>
-		
+
 
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
