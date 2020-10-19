@@ -41,11 +41,11 @@ public class Municipio implements Serializable {
 	
 	 @JoinColumn(name = "fk_departamento", nullable = false)
 	    @ManyToOne(optional = false, cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-	    private long dpto;
+	    private Departamento dpto;
 	 
 	 
 
-	public Municipio(Long id, String name, Float latitud, Float longitud, long dpto) {
+	public Municipio(Long id, String name, Float latitud, Float longitud, Departamento dpto) {
 		super();
 		this.id = id;
 		this.name = name;
@@ -86,11 +86,11 @@ public class Municipio implements Serializable {
 		this.longitud = longitud;
 	}
 
-	public long getDpto() {
+	public Departamento getDpto() {
 		return dpto;
 	}
 
-	public void setDpto(long dpto) {
+	public void setDpto(Departamento dpto) {
 		this.dpto = dpto;
 	}
 
