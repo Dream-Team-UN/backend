@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 package com.example.dataAccess.entity;
+=======
+package com.example.dataAccess.models.entity;
+>>>>>>> database
 
 import java.io.Serializable;
 import javax.persistence.CascadeType;
@@ -15,6 +19,10 @@ import javax.persistence.Table;
 
 
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> database
 @Entity
 @Table(name = "MUNICIPIO")
 public class Municipio implements Serializable {
@@ -31,6 +39,7 @@ public class Municipio implements Serializable {
 	
 	@Column
 	private String name;
+<<<<<<< HEAD
 	
 
 	
@@ -39,10 +48,32 @@ public class Municipio implements Serializable {
 	
 	@Column
 	private String longitud;
+=======
+
+	@Column
+	private Float latitud;
+	
+	@Column
+	private Float longitud;
+>>>>>>> database
 	
 	 @JoinColumn(name = "fk_departamento", nullable = false)
 	    @ManyToOne(optional = false, cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	    private Departamento dpto;
+<<<<<<< HEAD
+=======
+	 
+	 
+
+	public Municipio(Long id, String name, Float latitud, Float longitud, Departamento dpto) {
+		super();
+		this.id = id;
+		this.name = name;
+		this.latitud = latitud;
+		this.longitud = longitud;
+		this.dpto = dpto;
+	}
+>>>>>>> database
 
 	public Long getId() {
 		return id;
@@ -60,6 +91,7 @@ public class Municipio implements Serializable {
 		this.name = name;
 	}
 
+<<<<<<< HEAD
 
 
 	public String getCoordenadax() {
@@ -76,6 +108,22 @@ public class Municipio implements Serializable {
 
 	public void setCoordenaday(String coordenaday) {
 		this.longitud = coordenaday;
+=======
+	public Float getLatitud() {
+		return latitud;
+	}
+
+	public void setLatitud(Float latitud) {
+		this.latitud = latitud;
+	}
+
+	public Float getLongitud() {
+		return longitud;
+	}
+
+	public void setLongitud(Float longitud) {
+		this.longitud = longitud;
+>>>>>>> database
 	}
 
 	public Departamento getDpto() {
@@ -88,6 +136,7 @@ public class Municipio implements Serializable {
 
 	@Override
 	public String toString() {
+<<<<<<< HEAD
 		return "Municipio [id=" + id + ", name=" + name + ", coordenadax=" + latitud + ", coordenaday="
 				+ longitud + ", dpto=" + dpto + "]";
 	}
@@ -147,6 +196,11 @@ public class Municipio implements Serializable {
 
 	
 	
+=======
+		return "Municipio [id=" + id + ", name=" + name + ", latitud=" + latitud + ", longitud=" + longitud + ", dpto=" + dpto + "]";
+	}
+ 
+>>>>>>> database
 	
 	
 }

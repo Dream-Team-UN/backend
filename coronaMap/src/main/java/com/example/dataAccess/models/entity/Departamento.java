@@ -1,5 +1,6 @@
 package com.example.dataAccess.entity;
 
+package com.example.dataAccess.models.entity;
 
 import java.io.Serializable;
 import javax.persistence.Column;
@@ -8,9 +9,10 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+
 @Entity
 @Table(name = "DEPARTAMENTO")
-public class Departamento implements Serializable  {
+public class Departamento implements Serializable {
 
 	/**
 	 * 
@@ -19,17 +21,31 @@ public class Departamento implements Serializable  {
 
 	@Id
 	@Column(name = "ID")
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long id;	
-	
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Long id;
+
 	@Column
 	private String name;
 
 	@Column
 	private String latitud;
-	
+
 	@Column
 	private String longitud;
+
+	@Column
+	private Float latitud;
+
+	@Column
+	private Float longitud;
+
+	public Departamento(Long id, String name, Float latitud, Float longitud) {
+		super();
+		this.id = id;
+		this.name = name;
+		this.latitud = latitud;
+		this.longitud = longitud;
+	}
 
 	public Long getId() {
 		return id;
@@ -61,12 +77,27 @@ public class Departamento implements Serializable  {
 
 	public void setCoordenaday(String coordenaday) {
 		this.longitud = coordenaday;
+
+	public Float getLatitud() {
+		return latitud;
+	}
+
+	public void setLatitud(Float latitud) {
+		this.latitud = latitud;
+	}
+
+	public Float getLongitud() {
+		return longitud;
+	}
+
+	public void setLongitud(Float longitud) {
+		this.longitud = longitud;
 	}
 
 	@Override
 	public String toString() {
-		return "departamento [id=" + id + ", name=" + name + ", coordenadax=" + latitud + ", coordenaday="
-				+ longitud + "]";
+		return "departamento [id=" + id + ", name=" + name + ", coordenadax=" + latitud + ", coordenaday=" + longitud
+				+ "]";
 	}
 
 	@Override
@@ -112,7 +143,7 @@ public class Departamento implements Serializable  {
 		return true;
 	}
 
-	
-		
-	
+	return"Departamento [id="+id+", name="+name+", latitud="+latitud+", longitud="+longitud+"]";
+}
+
 }
