@@ -78,9 +78,5 @@ public class Departamento implements Serializable  {
 		return "Departamento [id=" + id + ", name=" + name + ", latitud=" + latitud + ", longitud=" + longitud
 				+ "]";
 	}
-
-
-	
-		
 	
 }
