@@ -24,7 +24,6 @@ public class infotemp {
 	@PostConstruct
 	public void init() {
 		infoList.add(new info(1,casosActuales, casosTotales, casosRecuperados, casosFallecidos,casosAsintomaticos));
-
 	}
 
 	public List<info> getData() {

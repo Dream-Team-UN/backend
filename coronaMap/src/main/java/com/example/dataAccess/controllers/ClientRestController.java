@@ -1,15 +1,20 @@
 package com.example.dataAccess.controllers;
 
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.example.dataAccess.models.InfoDepartamento;
 import com.example.dataAccess.models.info;
+import com.example.dataAccess.models.entity.Departamento;
 import com.example.dataAccess.repositories.CaseRepository;
 import com.example.dataAccess.repositories.infotemp;
 
@@ -33,6 +38,30 @@ public class ClientRestController {
 	@RequestMapping("/data1")
 	public List<info> findAll() {
 		return repository.getData();
+	}
+	@GetMapping("/data1/{departamento}")
+	public InfoDepartamento  getDepartamento(@PathVariable String departamento){
+
+		String casosAct = String.valueOf(caso.actualInfectedepar(departamento));
+		String casosTo = String.valueOf(caso.totalCasesdepar(departamento));
+		String casosRec = String.valueOf(caso.totalRecuperedepar(departamento));
+		String casosFal = String.valueOf(caso.totalDiedepar(departamento));
+		String casosAsin = String.valueOf(caso.totalAsintomaticsdepar(departamento));
+		InfoDepartamento datos =new InfoDepartamento(1,casosAct, casosTo, casosRec, casosFal,casosAsin);
+		
+		return datos;
+	}
+	@GetMapping("/data1/municipio/{municipio}")
+	public InfoDepartamento  getMunicipio(@PathVariable String municipio){
+
+		String casosAct = String.valueOf(caso.actualInfectedmun(municipio));
+		String casosTo = String.valueOf(caso.totalCasesmun(municipio));
+		String casosRec = String.valueOf(caso.totalRecuperedmun(municipio));
+		String casosFal = String.valueOf(caso.totalDiedmun(municipio));
+		String casosAsin = String.valueOf(caso.totalAsintomaticsmun(municipio));
+		InfoDepartamento datos =new InfoDepartamento(1,casosAct, casosTo, casosRec, casosFal,casosAsin);
+		
+		return datos;
 	}
 
 	@RequestMapping("/data")
