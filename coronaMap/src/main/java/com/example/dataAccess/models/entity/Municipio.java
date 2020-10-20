@@ -38,6 +38,10 @@ public class Municipio implements Serializable {
 	@JoinColumn(name = "fk_departamento", nullable = false)
 	@ManyToOne(optional = false, cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	private Departamento dpto;
+	
+	public Municipio() {
+		
+	}
 
 	public Municipio(Long id, String name, String latitud, String longitud, Departamento dpto) {
 		super();
