@@ -22,6 +22,7 @@ public class CoronaMapApplication {
 		System.out.println("recuperados totales " + repo.totalRecupered());
 		System.out.println("infectados actuales totales " + repo.actualInfected());
 		System.out.println("asintomaticos totales " + repo.totalAsintomatics());
+		System.out.println("asintomaticos totales de pasto " + repo.totalAsintomaticsmun("Pasto"));
 		long fin = System.currentTimeMillis();
 		System.out.println("Demora " + (double) (fin-inicio)/1000);
 		

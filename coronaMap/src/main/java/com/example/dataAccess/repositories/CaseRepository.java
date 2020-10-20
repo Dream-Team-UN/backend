@@ -105,7 +105,7 @@ public class CaseRepository {
 		return -1;
 	}
 //*******************************************************************************************************************	
-	//metodos de departamentos y municipios
+	//metodos de departamentos 
 	
 	//Se cuenta el total de casos por departamento
 		public int totalCasesdepar(String departamento) {
@@ -196,4 +196,97 @@ public class CaseRepository {
 			}
 			return -1;
 		}
+		//*******************************************************************************************************************	
+		//metodos de  municipios
+		
+		//Se cuenta el total de casos de municipio 
+			public int totalCasesmun(String municipio) {
+
+				return client.getClient().sendAsync(client.ClientRequest("?ciudad_de_ubicaci_n="+municipio+"&$select=count(id_de_caso)"), HttpResponse.BodyHandlers.ofString())
+						.thenApply(HttpResponse::body).thenApply(CaseRepository::totalCasesmcp).join();
+
+			}
+
+			public static int totalCasesmcp(String responseBody) {
+				JSONObject total = null;
+				try {
+					total = new JSONObject(responseBody.substring(1, responseBody.length()-1));
+					return total.getInt("count_id_de_caso");
+				} catch (JSONException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				
+				return -1;
+			}
+			
+			//Total de recuperados por departamentos
+			public int totalRecuperedmun(String municipio) {
+
+				return client.getClient().sendAsync(client.ClientRequest("?ciudad_de_ubicaci_n="+municipio+"&atenci_n=Recuperado&$select=count(atenci_n)"), HttpResponse.BodyHandlers.ofString())
+						.thenApply(HttpResponse::body).thenApply(CaseRepository::totalRecuperedmcp).join();
+
+			}
+
+			public static int totalRecuperedmcp(String responseBody) {
+				JSONObject recupered;
+				try {
+					recupered = new JSONObject(responseBody.substring(1, responseBody.length()-1));
+					return recupered.getInt("count_atenci_n");
+				} catch (JSONException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				return -1;
+				
+			}
+
+
+			//Total de fallecidos por municipio
+			public int totalDiedmun(String municipio) {
+
+				return client.getClient().sendAsync(client.ClientRequest("?ciudad_de_ubicaci_n="+municipio+"&atenci_n=Fallecido&$select=count(atenci_n)"), HttpResponse.BodyHandlers.ofString())
+						.thenApply(HttpResponse::body).thenApply(CaseRepository::totalDiedmcp).join();
+
+			}
+
+			public static int totalDiedmcp(String responseBody) {
+
+				JSONObject died = null;
+				try {
+					died = new JSONObject(responseBody.substring(1, responseBody.length()-1));
+					return died.getInt("count_atenci_n");
+				}catch (Exception e) {
+					// TODO: handle exception
+					e.printStackTrace();
+				}
+				return -1;
+			}
+			//Total de infectadoas actuales por municipio
+			public int actualInfectedmun(String municipio) {
+
+				return totalCasesmun(municipio)-totalDiedmun(municipio)-totalRecuperedmun(municipio);
+
+			}
+			
+			//total asintomaticos por departamento
+			public int totalAsintomaticsmun(String municipio) {
+
+				return client.getClient().sendAsync(client.ClientRequest("?ciudad_de_ubicaci_n="+municipio+"&estado=Asintomático&$select=count(estado)"), HttpResponse.BodyHandlers.ofString())
+						.thenApply(HttpResponse::body).thenApply(CaseRepository::totalAsintomaticsmcp).join();
+
+			}
+
+			public static int totalAsintomaticsmcp(String responseBody) {
+
+				JSONObject asintomatic = null;
+				try {
+					asintomatic = new JSONObject(responseBody.substring(1, responseBody.length()-1));
+					return asintomatic.getInt("count_estado");
+				} catch (JSONException e) {
+					e.printStackTrace();
+				}
+				return -1;
+			}
+		
 }
