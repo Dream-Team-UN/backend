@@ -51,6 +51,18 @@ public class ClientRestController {
 		
 		return datos;
 	}
+	@GetMapping("/data1/municipio/{municipio}")
+	public InfoDepartamento  getMunicipio(@PathVariable String municipio){
+
+		String casosAct = String.valueOf(caso.actualInfectedmun(municipio));
+		String casosTo = String.valueOf(caso.totalCasesmun(municipio));
+		String casosRec = String.valueOf(caso.totalRecuperedmun(municipio));
+		String casosFal = String.valueOf(caso.totalDiedmun(municipio));
+		String casosAsin = String.valueOf(caso.totalAsintomaticsmun(municipio));
+		InfoDepartamento datos =new InfoDepartamento(1,casosAct, casosTo, casosRec, casosFal,casosAsin);
+		
+		return datos;
+	}
 
 	@RequestMapping("/data")
 	public String hola(Model modelo) {
