@@ -39,18 +39,26 @@ public class Municipio implements Serializable {
 	@ManyToOne(optional = false, cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	private Departamento dpto;
 	
+	@Column
+	private float zoom;
+	
 	public Municipio() {
 		
 	}
 
-	public Municipio(Long id, String name, String latitud, String longitud, Departamento dpto) {
+	
+
+	public Municipio(Long id, String name, String latitud, String longitud, Departamento dpto, float zoom) {
 		super();
 		this.id = id;
 		this.name = name;
 		this.latitud = latitud;
 		this.longitud = longitud;
 		this.dpto = dpto;
+		this.zoom = zoom;
 	}
+
+
 
 	public Long getId() {
 		return id;
@@ -91,11 +99,28 @@ public class Municipio implements Serializable {
 	public void setDpto(Departamento dpto) {
 		this.dpto = dpto;
 	}
+	
+	
+
+	public float getZoom() {
+		return zoom;
+	}
+
+
+
+	public void setZoom(float zoom) {
+		this.zoom = zoom;
+	}
+
+
 
 	@Override
 	public String toString() {
-		return "Municipio [id=" + id + ", name=" + name + ", coordenadax=" + latitud + ", coordenaday="
-				+ longitud + ", dpto=" + dpto + "]";
+		return "Municipio [id=" + id + ", name=" + name + ", latitud=" + latitud + ", longitud=" + longitud + ", dpto="
+				+ dpto + ", zoom=" + zoom + "]";
 	}
+	
+	
+	
 
 }

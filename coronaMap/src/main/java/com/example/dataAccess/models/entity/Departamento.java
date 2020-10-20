@@ -31,17 +31,21 @@ public class Departamento implements Serializable {
 	@Column
 	private String longitud;
 	
+	@Column
+	private float zoom;
+	
 	public Departamento() {
 		
 	}
 
 
-	public Departamento(Long id, String name, String latitud, String longitud) {
+	public Departamento(Long id, String name, String latitud, String longitud, float zoom) {
 		super();
 		this.id = id;
 		this.name = name;
 		this.latitud = latitud;
 		this.longitud = longitud;
+		this.zoom = zoom;
 	}
 
 	public Long getId() {
@@ -75,11 +79,24 @@ public class Departamento implements Serializable {
 	public void setLongitud(String longitud) {
 		this.longitud = longitud;
 	}
+	
+
+	public float getZoom() {
+		return zoom;
+	}
+
+
+	public void setZoom(float zoom) {
+		this.zoom = zoom;
+	}
+
 
 	@Override
 	public String toString() {
-		return "departamento [id=" + id + ", name=" + name + ", coordenadax=" + latitud + ", coordenaday=" + longitud
-				+ "]";
+		return "Departamento [id=" + id + ", name=" + name + ", latitud=" + latitud + ", longitud=" + longitud
+				+ ", zoom=" + zoom + "]";
 	}
+
+	
 
 }

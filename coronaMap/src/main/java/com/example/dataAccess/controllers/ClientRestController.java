@@ -13,7 +13,7 @@ import com.example.dataAccess.models.info;
 import com.example.dataAccess.repositories.CaseRepository;
 import com.example.dataAccess.repositories.infotemp;
 
-@CrossOrigin(origins = { "http://localhost:8080" })
+@CrossOrigin(origins = { "http://localhost:8081" })
 @RestController
 public class ClientRestController {
 
