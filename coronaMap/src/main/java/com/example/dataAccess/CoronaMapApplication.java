@@ -24,6 +24,10 @@ public class CoronaMapApplication {
 		System.out.println("asintomaticos totales " + repo.totalAsintomatics());
 		System.out.println("asintomaticos totales de pasto " + repo.totalAsintomaticsmun("Pasto"));
 		long fin = System.currentTimeMillis();
+		System.out.println("Casos totales departamento " +  repo.totalCasesdepar("CUNDINAMARCA"));
+		System.out.println("Casos totales departamento " +  repo.totalAsintomaticsdepar("CUNDINAMARCA"));
+		System.out.println("Casos totales departamento " +  repo.totalDiedepar("CUNDINAMARCA"));
+		System.out.println("Casos totales departamento " +  repo.actualInfectedepar("CUNDINAMARCA"));
 		System.out.println("Demora " + (double) (fin-inicio)/1000);
 		
 	}

@@ -115,7 +115,7 @@ public class CaseRepository {
 	//Se cuenta el total de casos por departamento
 		public int totalCasesdepar(String departamento) {
 
-			return client.getClient().sendAsync(client.ClientRequest("?Departamento_nom="+departamento+"&$select=count(id_de_caso)"), HttpResponse.BodyHandlers.ofString())
+			return client.getClient().sendAsync(client.ClientRequest("?departamento_nom="+departamento+"&$select=count(id_de_caso)"), HttpResponse.BodyHandlers.ofString())
 					.thenApply(HttpResponse::body).thenApply(CaseRepository::totalCasesde).join();
 
 		}
