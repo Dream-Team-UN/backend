@@ -20,7 +20,6 @@ public class CaseRepository {
 
 		return client.getClient().sendAsync(client.ClientRequest("?$select=count(id_de_caso)"), HttpResponse.BodyHandlers.ofString())
 				.thenApply(HttpResponse::body).thenApply(CaseRepository::totalCases).join();
-
 	}
 
 	public static int totalCases(String responseBody) {
