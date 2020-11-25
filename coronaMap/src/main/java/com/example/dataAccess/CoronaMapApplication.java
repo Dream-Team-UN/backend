@@ -6,9 +6,6 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
-import com.example.dataAccess.controllers.DateController;
-import com.example.dataAccess.services.DateService;
-
 @EnableTransactionManagement
 @EnableJpaRepositories("com.example.dataAccess.repositories")
 @SpringBootApplication
