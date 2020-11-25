@@ -20,6 +20,7 @@
 		<sonar.projectKey>Dream-Team-UN_backend</sonar.projectKey>
 		<sonar.organization>dream-team-un</sonar.organization>
 		<sonar.host.url>https://sonarcloud.io</sonar.host.url>
+		<sonar.soources>src/main/java</sonar.soources>
 	</properties>
 
 	<dependencies>
