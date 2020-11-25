@@ -6,7 +6,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.example.dataAccess.models.entity.Departamento;
+import com.example.dataAccess.models.Departamento;
 import com.example.dataAccess.repositories.DepartamentoRepository;
 
 @Service
@@ -16,9 +16,10 @@ public class DepartamentService {
 	private DepartamentoRepository departamentoRepository;
 	
 	public List<Departamento> findAll(){
-		var it = departamentoRepository.findAll();
 		
-		var departaments = new ArrayList<Departamento>();
+		Iterable<Departamento> it = departamentoRepository.findAll();
+		
+		ArrayList<Departamento> departaments = new ArrayList<>();
 		
 		it.forEach(e -> departaments.add(e));
 		

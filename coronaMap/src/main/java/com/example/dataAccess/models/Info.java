@@ -1,6 +1,7 @@
 package com.example.dataAccess.models;
 
-public class InfoDepartamento {
+public class Info {
+
 	private int id;
 	private String casosAct;
 	private String casosTol;
@@ -8,8 +9,7 @@ public class InfoDepartamento {
 	private String casosFal;
 	private String casosAsin;
 
-	public InfoDepartamento(int id, String casosAct, String casosTol, String casosRec, String casosFal,
-			String casosAsin) {
+	public Info(int id, String casosAct, String casosTol, String casosRec, String casosFal, String casosAsin) {
 		super();
 		this.id = id;
 		this.casosAct = casosAct;

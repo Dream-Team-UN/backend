@@ -18,7 +18,7 @@ public class CaseRepository {
 	//Se cuenta el total de casos
 	public int totalCases() {
 
-		return client.getClient().sendAsync(client.ClientRequest("?$select=count(id_de_caso)"), HttpResponse.BodyHandlers.ofString())
+		return client.getClient().sendAsync(client.clientRequest("?$select=count(id_de_caso)"), HttpResponse.BodyHandlers.ofString())
 				.thenApply(HttpResponse::body).thenApply(CaseRepository::totalCases).join();
 	}
 
@@ -28,7 +28,6 @@ public class CaseRepository {
 			total = new JSONObject(responseBody.substring(1, responseBody.length()-1));
 			return total.getInt("count_id_de_caso");
 		} catch (JSONException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		
@@ -45,7 +44,7 @@ public class CaseRepository {
 	//Total de recuperados
 	public int totalRecupered() {
 
-		return client.getClient().sendAsync(client.ClientRequest("?Recuperado=Recuperado&$select=count(Recuperado)"), HttpResponse.BodyHandlers.ofString())
+		return client.getClient().sendAsync(client.clientRequest("?Recuperado=Recuperado&$select=count(Recuperado)"), HttpResponse.BodyHandlers.ofString())
 				.thenApply(HttpResponse::body).thenApply(CaseRepository::totalRecupered).join();
 
 	}
@@ -56,7 +55,6 @@ public class CaseRepository {
 			recupered = new JSONObject(responseBody.substring(1, responseBody.length()-1));
 			return recupered.getInt("count_Recuperado");
 		} catch (JSONException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return -1;
@@ -68,7 +66,7 @@ public class CaseRepository {
 	//Total de fallecidos
 	public int totalDied() {
 
-		return client.getClient().sendAsync(client.ClientRequest("?Recuperado=Fallecido&$select=count(Recuperado)"), HttpResponse.BodyHandlers.ofString())
+		return client.getClient().sendAsync(client.clientRequest("?Recuperado=Fallecido&$select=count(Recuperado)"), HttpResponse.BodyHandlers.ofString())
 				.thenApply(HttpResponse::body).thenApply(CaseRepository::totalDied).join();
 
 	}
@@ -80,7 +78,6 @@ public class CaseRepository {
 			died = new JSONObject(responseBody.substring(1, responseBody.length()-1));
 			return died.getInt("count_Recuperado");
 		}catch (Exception e) {
-			// TODO: handle exception
 			e.printStackTrace();
 		}
 		return -1;
@@ -88,7 +85,7 @@ public class CaseRepository {
 	
 	public int totalAsintomaticos() {
 
-		return client.getClient().sendAsync(client.ClientRequest("?$select=count(Fecha_inicio_sintomas)"), HttpResponse.BodyHandlers.ofString())
+		return client.getClient().sendAsync(client.clientRequest("?$select=count(Fecha_inicio_sintomas)"), HttpResponse.BodyHandlers.ofString())
 				.thenApply(HttpResponse::body).thenApply(CaseRepository::totalAsintomatics).join();
 
 	}
@@ -114,66 +111,28 @@ public class CaseRepository {
 	//Se cuenta el total de casos por departamento
 		public int totalCasesdepar(String departamento) {
 
-			return client.getClient().sendAsync(client.ClientRequest("?departamento_nom="+departamento+"&$select=count(id_de_caso)"), HttpResponse.BodyHandlers.ofString())
-					.thenApply(HttpResponse::body).thenApply(CaseRepository::totalCasesde).join();
+			return client.getClient().sendAsync(client.clientRequest("?departamento_nom="+departamento+"&$select=count(id_de_caso)"), HttpResponse.BodyHandlers.ofString())
+					.thenApply(HttpResponse::body).thenApply(CaseRepository::totalCases).join();
 
-		}
-
-		public static int totalCasesde(String responseBody) {
-			JSONObject total = null;
-			try {
-				total = new JSONObject(responseBody.substring(1, responseBody.length()-1));
-				return total.getInt("count_id_de_caso");
-			} catch (JSONException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-			
-			return -1;
 		}
 		
 		//Total de recuperados por departamentos
 		public int totalRecuperedepar(String departamento) {
 
-			return client.getClient().sendAsync(client.ClientRequest("?departamento_nom="+departamento+"&Recuperado=Recuperado&$select=count(Recuperado)"), HttpResponse.BodyHandlers.ofString())
-					.thenApply(HttpResponse::body).thenApply(CaseRepository::totalRecuperedd).join();
+			return client.getClient().sendAsync(client.clientRequest("?departamento_nom="+departamento+"&Recuperado=Recuperado&$select=count(Recuperado)"), HttpResponse.BodyHandlers.ofString())
+					.thenApply(HttpResponse::body).thenApply(CaseRepository::totalRecupered).join();
 
-		}
-
-		public static int totalRecuperedd(String responseBody) {
-			JSONObject recupered;
-			try {
-				recupered = new JSONObject(responseBody.substring(1, responseBody.length()-1));
-				return recupered.getInt("count_Recuperado");
-			} catch (JSONException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-			return -1;
-			
 		}
 
 
 		//Total de fallecidos por departamento
 		public int totalDiedepar(String departamento) {
 
-			return client.getClient().sendAsync(client.ClientRequest("?departamento_nom="+departamento+"&Recuperado=Fallecido&$select=count(Recuperado)"), HttpResponse.BodyHandlers.ofString())
-					.thenApply(HttpResponse::body).thenApply(CaseRepository::totalDiedd).join();
+			return client.getClient().sendAsync(client.clientRequest("?departamento_nom="+departamento+"&Recuperado=Fallecido&$select=count(Recuperado)"), HttpResponse.BodyHandlers.ofString())
+					.thenApply(HttpResponse::body).thenApply(CaseRepository::totalDied).join();
 
 		}
-
-		public static int totalDiedd(String responseBody) {
-
-			JSONObject died = null;
-			try {
-				died = new JSONObject(responseBody.substring(1, responseBody.length()-1));
-				return died.getInt("count_Recuperado");
-			}catch (Exception e) {
-				// TODO: handle exception
-				e.printStackTrace();
-			}
-			return -1;
-		}
+		
 		//Total de infectadoas actuales por departamento
 		public int actualInfectedepar(String departamento) {
 
@@ -184,7 +143,7 @@ public class CaseRepository {
 		//total asintomaticos por departamento
 		public int totalAsintomaticsdepar(String departamento) {
 
-			return totalCasesdepar(departamento) - client.getClient().sendAsync(client.ClientRequest("?departamento_nom="+departamento+"&$select=count(fecha_inicio_sintomas)"), HttpResponse.BodyHandlers.ofString())
+			return totalCasesdepar(departamento) - client.getClient().sendAsync(client.clientRequest("?departamento_nom="+departamento+"&$select=count(fecha_inicio_sintomas)"), HttpResponse.BodyHandlers.ofString())
 					.thenApply(HttpResponse::body).thenApply(CaseRepository::totalAsintomaticsd).join();
 
 		}
@@ -206,65 +165,25 @@ public class CaseRepository {
 		//Se cuenta el total de casos de municipio 
 			public int totalCasesmun(String municipio) {
 
-				return client.getClient().sendAsync(client.ClientRequest("?ciudad_municipio_nom="+municipio+"&$select=count(id_de_caso)"), HttpResponse.BodyHandlers.ofString())
-						.thenApply(HttpResponse::body).thenApply(CaseRepository::totalCasesmcp).join();
+				return client.getClient().sendAsync(client.clientRequest("?ciudad_municipio_nom="+municipio+"&$select=count(id_de_caso)"), HttpResponse.BodyHandlers.ofString())
+						.thenApply(HttpResponse::body).thenApply(CaseRepository::totalCases).join();
 
-			}
-
-			public static int totalCasesmcp(String responseBody) {
-				JSONObject total = null;
-				try {
-					total = new JSONObject(responseBody.substring(1, responseBody.length()-1));
-					return total.getInt("count_id_de_caso");
-				} catch (JSONException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-				
-				return -1;
 			}
 			
 			//Total de recuperados por departamentos
 			public int totalRecuperedmun(String municipio) {
 
-				return client.getClient().sendAsync(client.ClientRequest("?ciudad_municipio_nom="+municipio+"&Recuperado=Recuperado&$select=count(Recuperado)"), HttpResponse.BodyHandlers.ofString())
-						.thenApply(HttpResponse::body).thenApply(CaseRepository::totalRecuperedmcp).join();
+				return client.getClient().sendAsync(client.clientRequest("?ciudad_municipio_nom="+municipio+"&Recuperado=Recuperado&$select=count(Recuperado)"), HttpResponse.BodyHandlers.ofString())
+						.thenApply(HttpResponse::body).thenApply(CaseRepository::totalRecupered).join();
 
 			}
-
-			public static int totalRecuperedmcp(String responseBody) {
-				JSONObject recupered;
-				try {
-					recupered = new JSONObject(responseBody.substring(1, responseBody.length()-1));
-					return recupered.getInt("count_Recuperado");
-				} catch (JSONException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-				return -1;
-				
-			}
-
 
 			//Total de fallecidos por municipio
 			public int totalDiedmun(String municipio) {
 
-				return client.getClient().sendAsync(client.ClientRequest("?ciudad_municipio_nom="+municipio+"&Recuperado=Fallecido&$select=count(Recuperado)"), HttpResponse.BodyHandlers.ofString())
-						.thenApply(HttpResponse::body).thenApply(CaseRepository::totalDiedmcp).join();
+				return client.getClient().sendAsync(client.clientRequest("?ciudad_municipio_nom="+municipio+"&Recuperado=Fallecido&$select=count(Recuperado)"), HttpResponse.BodyHandlers.ofString())
+						.thenApply(HttpResponse::body).thenApply(CaseRepository::totalDied).join();
 
-			}
-
-			public static int totalDiedmcp(String responseBody) {
-
-				JSONObject died = null;
-				try {
-					died = new JSONObject(responseBody.substring(1, responseBody.length()-1));
-					return died.getInt("count_Recuperado");
-				}catch (Exception e) {
-					// TODO: handle exception
-					e.printStackTrace();
-				}
-				return -1;
 			}
 			//Total de infectadoas actuales por municipio
 			public int actualInfectedmun(String municipio) {
@@ -276,7 +195,7 @@ public class CaseRepository {
 			//total asintomaticos por departamento
 			public int totalAsintomaticosmun(String municipio) {
 
-				return client.getClient().sendAsync(client.ClientRequest("?ciudad_municipio_nom="+municipio+"&$select=count(fecha_inicio_sintomas)"), HttpResponse.BodyHandlers.ofString())
+				return client.getClient().sendAsync(client.clientRequest("?ciudad_municipio_nom="+municipio+"&$select=count(fecha_inicio_sintomas)"), HttpResponse.BodyHandlers.ofString())
 						.thenApply(HttpResponse::body).thenApply(CaseRepository::totalAsintomaticsmcp).join();
 
 			}

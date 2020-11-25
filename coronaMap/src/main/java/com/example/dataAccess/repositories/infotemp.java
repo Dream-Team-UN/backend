@@ -7,12 +7,12 @@ import javax.annotation.PostConstruct;
 
 import org.springframework.stereotype.Component;
 
-import com.example.dataAccess.models.info;
+import com.example.dataAccess.models.Info;
 
 @Component
 public class infotemp {
 
-	List<info> infoList = new ArrayList<info>();
+	List<Info> infoList = new ArrayList<>();
 
 	CaseRepository caso = new CaseRepository();
 	String casosActuales = String.valueOf(caso.actualInfected());
@@ -23,10 +23,10 @@ public class infotemp {
 	
 	@PostConstruct
 	public void init() {
-		infoList.add(new info(1,casosActuales, casosTotales, casosRecuperados, casosFallecidos,casosAsintomaticos));
+		infoList.add(new Info(1,casosActuales, casosTotales, casosRecuperados, casosFallecidos,casosAsintomaticos));
 	}
 
-	public List<info> getData() {
+	public List<Info> getData() {
 		return infoList;
 	}
 }

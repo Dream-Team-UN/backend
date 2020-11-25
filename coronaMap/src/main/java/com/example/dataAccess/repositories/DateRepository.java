@@ -46,7 +46,7 @@ public interface DateRepository {
 
 		return client.getClient()
 				.sendAsync(
-						client.ClientRequest(
+						client.clientRequest(
 								"?fecha_reporte_web=" + fecha + "%200:00:00&$select=count(fecha_reporte_web)"),
 						HttpResponse.BodyHandlers.ofString())
 				.thenApply(HttpResponse::body).thenApply(DateRepository::weekCases).join();
@@ -73,7 +73,7 @@ public interface DateRepository {
 
 		return client.getClient()
 				.sendAsync(
-						client.ClientRequest(
+						client.clientRequest(
 								"?fecha_reporte_web=" + fecha + "%200:00:00&$select=count(fecha_reporte_web)"),
 						HttpResponse.BodyHandlers.ofString())
 				.thenApply(HttpResponse::body).thenApply(DateRepository::twoWeekCases).join();
@@ -98,7 +98,7 @@ public interface DateRepository {
 	
 	public static List<Integer> monthCase(String fecha) {
 		
-		return client.getClient().sendAsync(client.ClientRequest("?fecha_reporte_web="+fecha+"%200:00:00&$select=count(fecha_reporte_web)"), 
+		return client.getClient().sendAsync(client.clientRequest("?fecha_reporte_web="+fecha+"%200:00:00&$select=count(fecha_reporte_web)"), 
 				HttpResponse.BodyHandlers.ofString()).thenApply(HttpResponse::body).thenApply(DateRepository::weekCases).join();
 		
 	}
@@ -121,7 +121,7 @@ public interface DateRepository {
 	
 	public static List<Integer> twoMonthCase(String fecha) {
 		
-		return client.getClient().sendAsync(client.ClientRequest("?fecha_reporte_web="+fecha+"%200:00:00&$select=count(fecha_reporte_web)"), 
+		return client.getClient().sendAsync(client.clientRequest("?fecha_reporte_web="+fecha+"%200:00:00&$select=count(fecha_reporte_web)"), 
 				HttpResponse.BodyHandlers.ofString()).thenApply(HttpResponse::body).thenApply(DateRepository::twoMonthCases).join();
 		
 	}

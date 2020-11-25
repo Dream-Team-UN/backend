@@ -6,7 +6,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.example.dataAccess.models.entity.Municipio;
+import com.example.dataAccess.models.Municipio;
 import com.example.dataAccess.repositories.MunicipioRepository;
 
 @Service
@@ -16,9 +16,9 @@ public class MunicipioService {
 	private MunicipioRepository municipioRepository;
 	
 	public List<Municipio> findAll(){
-		var it = municipioRepository.findAll();
+		Iterable<Municipio> it = municipioRepository.findAll();
 		
-		var municipios = new ArrayList<Municipio>();
+		ArrayList<Municipio> municipios = new ArrayList<>();
 		
 		it.forEach(e -> municipios.add(e));
 		

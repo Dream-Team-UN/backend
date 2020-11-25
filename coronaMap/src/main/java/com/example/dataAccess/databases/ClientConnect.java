@@ -15,7 +15,7 @@ public class ClientConnect {
 		return client;
 	}
 
-	public HttpRequest ClientRequest(String request) {
+	public HttpRequest clientRequest(String request) {
 		return HttpRequest.newBuilder()
 				.uri(URI.create(url + request)).build();
 	}

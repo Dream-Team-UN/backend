@@ -2,20 +2,20 @@ package com.example.dataAccess.models;
 
 public class InfoMunicipio {
 	private int id;
-	private String CasosAct;
-	private String CasosTol;
-	private String CasosRec;
-	private String CasosFal;
-	private String CasosAsin;
-	
+	private String casosAct;
+	private String casosTol;
+	private String casosRec;
+	private String casosFal;
+	private String casosAsin;
+
 	public InfoMunicipio(int id, String casosAct, String casosTol, String casosRec, String casosFal, String casosAsin) {
 		super();
 		this.id = id;
-		CasosAct = casosAct;
-		CasosTol = casosTol;
-		CasosRec = casosRec;
-		CasosFal = casosFal;
-		CasosAsin = casosAsin;
+		this.casosAct = casosAct;
+		this.casosTol = casosTol;
+		this.casosRec = casosRec;
+		this.casosFal = casosFal;
+		this.casosAsin = casosAsin;
 	}
 
 	public int getId() {
@@ -27,43 +27,43 @@ public class InfoMunicipio {
 	}
 
 	public String getCasosAct() {
-		return CasosAct;
+		return casosAct;
 	}
 
 	public void setCasosAct(String casosAct) {
-		CasosAct = casosAct;
+		this.casosAct = casosAct;
 	}
 
 	public String getCasosTol() {
-		return CasosTol;
+		return casosTol;
 	}
 
 	public void setCasosTol(String casosTol) {
-		CasosTol = casosTol;
+		this.casosTol = casosTol;
 	}
 
 	public String getCasosRec() {
-		return CasosRec;
+		return casosRec;
 	}
 
 	public void setCasosRec(String casosRec) {
-		CasosRec = casosRec;
+		this.casosRec = casosRec;
 	}
 
 	public String getCasosFal() {
-		return CasosFal;
+		return casosFal;
 	}
 
 	public void setCasosFal(String casosFal) {
-		CasosFal = casosFal;
+		this.casosFal = casosFal;
 	}
 
 	public String getCasosAsin() {
-		return CasosAsin;
+		return casosAsin;
 	}
 
 	public void setCasosAsin(String casosAsin) {
-		CasosAsin = casosAsin;
+		this.casosAsin = casosAsin;
 	}
-	
+
 }

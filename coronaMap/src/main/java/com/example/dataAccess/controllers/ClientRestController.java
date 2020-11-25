@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.dataAccess.models.InfoDepartamento;
-import com.example.dataAccess.models.info;
+import com.example.dataAccess.models.Info;
 import com.example.dataAccess.repositories.CaseRepository;
 import com.example.dataAccess.repositories.infotemp;
 
@@ -34,7 +34,7 @@ public class ClientRestController {
 	 * @GetMapping("/") public String index() { return "index"; }
 	 */
 	@RequestMapping("/data1")
-	public List<info> findAll() {
+	public List<Info> findAll() {
 		return repository.getData();
 	}
 	@GetMapping("/data1/{departamento}")

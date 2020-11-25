@@ -16,12 +16,6 @@ public class CoronaMapApplication {
 
 	@Autowired
 	public static void main(String[] args) {
-		
-		//System.out.println(dateService.weekCount().toString());
-		/*System.out.println(dateController.countTwoWeek().toString());
-		System.out.println(dateController.countMonth().toString());
-		System.out.println(dateController.countTwoMonth().toString());
-		*/
 		SpringApplication.run(CoronaMapApplication.class, args);
 
 	}
