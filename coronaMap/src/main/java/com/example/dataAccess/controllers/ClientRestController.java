@@ -12,9 +12,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.dataAccess.models.InfoDepartamento;
+import com.example.dataAccess.models.InfoMunicipio;
 import com.example.dataAccess.models.Info;
 import com.example.dataAccess.repositories.CaseRepository;
 import com.example.dataAccess.repositories.infotemp;
+import com.example.dataAccess.services.InfoDepartamentServices;
+import com.example.dataAccess.services.InfoMunicipioServices;
 
 @CrossOrigin(origins = { "http://localhost:8081" })
 @RestController
@@ -30,6 +33,11 @@ public class ClientRestController {
 	@Autowired
 	infotemp repository;
 
+	@Autowired
+	InfoDepartamentServices dataD;
+	
+	@Autowired
+	InfoMunicipioServices dataM;
 	/*
 	 * @GetMapping("/") public String index() { return "index"; }
 	 */
@@ -38,28 +46,12 @@ public class ClientRestController {
 		return repository.getData();
 	}
 	@GetMapping("/data1/{departamento}")
-	public InfoDepartamento  getDepartamento(@PathVariable String departamento){
-
-		String casosAct = String.valueOf(caso.actualInfectedepar(departamento));
-		String casosTo = String.valueOf(caso.totalCasesdepar(departamento));
-		String casosRec = String.valueOf(caso.totalRecuperedepar(departamento));
-		String casosFal = String.valueOf(caso.totalDiedepar(departamento));
-		String casosAsin = String.valueOf(caso.totalAsintomaticsdepar(departamento));
-		InfoDepartamento datos =new InfoDepartamento(1,casosAct, casosTo, casosRec, casosFal,casosAsin);
-		
-		return datos;
+		public InfoDepartamento find(@PathVariable String departamento) {
+			return dataD.getData(departamento);
 	}
 	@GetMapping("/data1/municipio/{municipio}")
-	public InfoDepartamento  getMunicipio(@PathVariable String municipio){
-
-		String casosAct = String.valueOf(caso.actualInfectedmun(municipio));
-		String casosTo = String.valueOf(caso.totalCasesmun(municipio));
-		String casosRec = String.valueOf(caso.totalRecuperedmun(municipio));
-		String casosFal = String.valueOf(caso.totalDiedmun(municipio));
-		String casosAsin = String.valueOf(caso.totalAsintomaticsmun(municipio));
-		InfoDepartamento datos =new InfoDepartamento(1,casosAct, casosTo, casosRec, casosFal,casosAsin);
-		
-		return datos;
+	public InfoMunicipio  findM(@PathVariable String municipio){
+		return dataM.getData(municipio);
 	}
 
 	@RequestMapping("/data")
